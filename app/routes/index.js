@@ -5,11 +5,9 @@ let router = express.Router();
 
 router
 // ####### COMPANIES ####### //
-.get("/mesas", mesas.get)
-.get("/mesas/:id", mesas.getOne)
-.post("/mesas", mesas.create)
-.post("/mesas/update", mesas.update)
-.delete("/mesas/", mesas.remove)
-.get("/mesas", mesas.getPoints)
+.get("/mesas", mesas.getMesas)
+.get("/mesas/:id", mesas.getOneMesa)
+.get("/mesas/open/:id", mesas.openMesa)
+.get("/mesas/close/:id", mesas.closeMesa)
 
 export default router;

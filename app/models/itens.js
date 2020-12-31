@@ -7,4 +7,4 @@ const model = mongoose.Schema({
   foto: {type: String}
 });
 
-export default mongoose.model('mesas', model);
+export default mongoose.model('itens', model);

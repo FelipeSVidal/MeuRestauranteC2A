@@ -4,7 +4,6 @@ import routes from './routes';
 import bodyParser from 'body-parser';
 import actions from './actions';
 import jwt from './middlewares/token';
-import task from './tasks'
 require('dotenv').config();
 const app = express();
 
@@ -13,15 +12,13 @@ mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
 mongoose.set('useUnifiedTopology', true)
 // mongoose.set('debug', true)
-mongoose.connect("mongodb://127.0.0.1:27017/restaurante")
+mongoose.connect(process.env.DB)
 mongoose.Promise = Promise
 mongoose.connection.on('error', (err) => console.error('Erro ao se conectar ao MongoDB: ', process.env.DB, err))
 mongoose.connection.on('open', () => console.log('Conectado ao mongoDB:', process.env.DB))
 
 actions.createCollections();
-actions.populateSeeds();
-actions.elegeCause();
-task.historyCompanie();
+// actions.populateSeeds();
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use((req, res, next) => {
