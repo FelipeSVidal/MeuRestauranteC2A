@@ -1,9 +1,10 @@
 import mesasModel from '../models/mesas'
+import mongoose from 'mongoose'
 
 
 const getMesas = async (req, res, next) => {
   try {
-    let mesas = await mesasModel.find({status: 'Livre'});
+    let mesas = await mesasModel.find({});
 
     res.status(200).json(mesas);
   } catch (error) {
@@ -13,10 +14,11 @@ const getMesas = async (req, res, next) => {
 
 const getOneMesa = async (req, res, next) => {
   try {
-    let {id} = req.param;
-    let mesa = await mesasModel.findOne({_id: id});
-
-    mesa.formatarPedidos();
+    let {id} = req.params;
+    console.log(id);
+    let mesa = await mesasModel.findOne({_id: id}).populate('pedidos');
+    // await mesa.populate('pedidos.itens');
+    await mesa.formatarPedidos();
 
     res.status(200).json(mesa);
   } catch (error) {
@@ -26,7 +28,7 @@ const getOneMesa = async (req, res, next) => {
 
 const closeMesa = async (req, res, next) => {
   try {
-    let {id} = req.param;
+    let {id} = req.params;
     let mesa = await mesasModel.findOne({_id: id});
     mesa.status = "Livre";
     mesa.pedidos = null;

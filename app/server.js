@@ -29,7 +29,7 @@ app.use((req, res, next) => {
   next()
 });
 
-app.use(jwt.jwtDecode);
+// app.use(jwt.jwtDecode); Autorização
 app.use("/api", routes);
 app.use(function(req, res, next) {
   res.status(404).json('O endereço requisitado não existe')

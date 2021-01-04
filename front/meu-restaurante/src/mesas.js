@@ -9,7 +9,7 @@ const Mesas = (props) => {
   const getMesas = React.useCallback( async () => {
     const response = await api.get("/mesas");
     console.log(response);
-    const data = await response.json();
+    const data = await response.data;
     setMesas(data);
   }, []);
 
